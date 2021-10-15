@@ -42,6 +42,8 @@ let seattle = {
     pNode.textContent = seattle.name;
     seattleStore.appendChild(pNode);
 
+    let totalCookiesSoldPerDay = 0;
+
     // Create a loop for each of the 14 hours.
     for(let i = 0; i < 14; i++){
 
@@ -59,12 +61,10 @@ let seattle = {
       // Add child to existing id "seattleList".
       seattleStore.appendChild(liNode);
 
+      totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
+
       // For the last iteration only.
       if (i === 13){
-        // Create a loop to sum the cookies sold for the day.
-        let totalCookiesSoldPerDay = 0;
-
-        totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
 
         liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
 
@@ -107,6 +107,8 @@ let tokyo = {
     pNode.textContent = tokyo.name;
     tokyoStore.appendChild(pNode);
 
+    let totalCookiesSoldPerDay = 0;
+
     // Create a loop for each of the 14 hours.
     for(let i = 0; i < 14; i++){
 
@@ -123,12 +125,10 @@ let tokyo = {
       // Add child to existing id "tokyoList".
       tokyoStore.appendChild(liNode);
 
+      totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
+
       // For the last iteration only.
       if (i === 13){
-        // Create a loop to sum the cookies sold for the day.
-        let totalCookiesSoldPerDay = 0;
-
-        totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
 
         liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
 
@@ -171,6 +171,8 @@ let dubai = {
     pNode.textContent = dubai.name;
     dubaiStore.appendChild(pNode);
 
+    let totalCookiesSoldPerDay = 0;
+
     // Create a loop for each of the 14 hours.
     for(let i = 0; i < 14; i++){
 
@@ -187,12 +189,10 @@ let dubai = {
       // Add child to existing id "dubaiList".
       dubaiStore.appendChild(liNode);
 
+      totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
+
       // For the last iteration only.
       if (i === 13){
-        // Create a loop to sum the cookies sold for the day.
-        let totalCookiesSoldPerDay = 0;
-
-        totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
 
         liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
 
@@ -235,6 +235,8 @@ let paris = {
     pNode.textContent = paris.name;
     parisStore.appendChild(pNode);
 
+    let totalCookiesSoldPerDay = 0;
+
     // Create a loop for each of the 14 hours.
     for(let i = 0; i < 14; i++){
 
@@ -251,12 +253,10 @@ let paris = {
       // Add child to existing id "parisList".
       parisStore.appendChild(liNode);
 
+      totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
+
       // For the last iteration only.
       if (i === 13){
-        // Create a loop to sum the cookies sold for the day.
-        let totalCookiesSoldPerDay = 0;
-
-        totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
 
         liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
 
@@ -299,6 +299,8 @@ let lima = {
     pNode.textContent = lima.name;
     limaStore.appendChild(pNode);
 
+    let totalCookiesSoldPerDay = 0;
+
     // Create a loop for each of the 14 hours.
     for(let i = 0; i < 14; i++){
 
@@ -315,13 +317,10 @@ let lima = {
       // Add child to existing id "limaList".
       limaStore.appendChild(liNode);
 
+      totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
+
       // For the last iteration only.
       if (i === 13){
-        // Create a loop to sum the cookies sold for the day.
-        let totalCookiesSoldPerDay = 0;
-
-        totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
-
         liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
 
         limaStore.appendChild(liNode);
