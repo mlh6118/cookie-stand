@@ -8,7 +8,7 @@ const dubaiStore = document.getElementById('dubaiList');
 const parisStore = document.getElementById('parisList');
 const limaStore = document.getElementById('limaList');
 
-let hours = ['6 a.m.', '7 a.m.', '8 a.m.', '9 a.m.', '10 a.m.', '11 a.m.', '12 p.m.', '1 p.m.', '2 p.m.', '3 p.m.', '4 p.m.', '5 p.m.', '6 p.m.', '7 p.m.'];
+let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 // Define seattleStore properties and functions.
 let seattle = {
@@ -53,7 +53,8 @@ let seattle = {
       let liNode = document.createElement('li'); // <li> node
       // let ulElement = document.getElementById('seattleList'); ** Already at the top of file.
 
-      liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
 
       // Use for validation purposes.
       console.log(this.cookiesSoldEachHourArray[i]);
@@ -117,7 +118,8 @@ let tokyo = {
       // Declare variables.
       let liNode = document.createElement('li'); // <li> node
 
-      liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
 
       // Use for validation purposes.
       console.log(this.cookiesSoldEachHourArray[i]);
@@ -181,7 +183,8 @@ let dubai = {
       // Declare variables.
       let liNode = document.createElement('li'); // <li> node
 
-      liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
 
       // Use for validation purposes.
       console.log(this.cookiesSoldEachHourArray[i]);
@@ -245,7 +248,8 @@ let paris = {
       // Declare variables.
       let liNode = document.createElement('li'); // <li> node
 
-      liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
 
       // Use for validation purposes.
       console.log(this.cookiesSoldEachHourArray[i]);
@@ -309,7 +313,8 @@ let lima = {
       // Declare variables.
       let liNode = document.createElement('li'); // <li> node
 
-      liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
+      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
 
       // Use for validation purposes.
       console.log(this.cookiesSoldEachHourArray[i]);
