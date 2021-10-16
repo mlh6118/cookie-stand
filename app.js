@@ -1,342 +1,134 @@
 'use strict';
 
-// Objects for the various Stores.
-// Define variables.
-const seattleStore = document.getElementById('seattleList');
-const tokyoStore = document.getElementById('tokyoList');
-const dubaiStore = document.getElementById('dubaiList');
-const parisStore = document.getElementById('parisList');
-const limaStore = document.getElementById('limaList');
+const storeTableBody = document.querySelector('tbody');
+const storeTableHeaders = document.querySelector('thead');
+const storeTableFooters = document.querySelector('tfoot');
 
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+let storeArray = [];
 
-// Define seattleStore properties and functions.
-let seattle = {
+// Generate the table headers.
+function Headers(){
+
+  let tr = document.createElement('tr');
+
+  let tdEmtpy = document.createElement('td');
+  tr.appendChild(tdEmtpy);
+
+  for (let i = 0; i < 14; i++){
+
+    let tdHeaderHours = document.createElement('td');
+    tdHeaderHours.textContent = hours[i];
+    tr.appendChild(tdHeaderHours);
+    storeTableHeaders.appendChild(tr);
+
+  }
+
+  let tdLocationTotal = document.createElement('td');
+  tdLocationTotal.textContent = 'Location Total';
+  tr.appendChild(tdLocationTotal);
+
+}
+
+Headers();
+
+function Store(name, min, max, avg){
   // Properties.
-  name: 'Seattle',
-  min: 23,
-  max: 65,
-  avg: 6.3,
-  cookiesSoldEachHourArray: [],
+  this.name = name;
+  this.min = min;
+  this.max = max;
+  this.avg = avg;
+  this.cookiesSoldEachHourArray = [];
 
-  // Functions.  Put comma after each closing brace of a function, except the final one.
   // Generate random numbers of customers.
-  getRandomCustomers: function() {
+  this.getRandomCustomers = function() {
     return Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
   },
 
   // Generate the number of cookies sold for a given (this) hour.
-  getCookieSalesPerHour: function() {
-    let customersThisHour = this.getRandomCustomers();
-    let totalCookiesSoldThisHour = Math.ceil(customersThisHour * this.avg);
+  this.getCookieSalesPerHour = function() {
+    for(let i = 0; i < hours.length; i++){
+      let customersThisHour = this.getRandomCustomers();
+      let totalCookiesSoldThisHour = Math.ceil(customersThisHour * this.avg);
 
-    // Send the number of cookies sold for the hour to the array.
-    this.cookiesSoldEachHourArray.push(totalCookiesSoldThisHour);
-    console.log(this.cookiesSoldEachHourArray);
+      // Send the number of cookies sold for the hour to the array.
+      this.cookiesSoldEachHourArray.push(totalCookiesSoldThisHour);
+      console.log(this.cookiesSoldEachHourArray);
+    }
   },
 
   // Render the list of cookies sold per hour to the webpage.
-  renderTheList: function() {
+  this.renderTheList = function() {
 
-    let pNode = document.createElement('p'); // <p> node
-    pNode.textContent = seattle.name;
-    seattleStore.appendChild(pNode);
+    let tr = document.createElement('tr');
+    let td = document.createElement('td');
+    td.textContent = this.name;
+    tr.appendChild(td);
+    storeTableBody.appendChild(tr);
 
     let totalCookiesSoldPerDay = 0;
 
     // Create a loop for each of the 14 hours.
     for(let i = 0; i < 14; i++){
 
-      this.getCookieSalesPerHour();
-
-      // Declare variables.
-      let liNode = document.createElement('li'); // <li> node
-      // let ulElement = document.getElementById('seattleList'); ** Already at the top of file.
-
-      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
-      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
-
-      // Use for validation purposes.
-      console.log(this.cookiesSoldEachHourArray[i]);
-
-      // Add child to existing id "seattleList".
-      seattleStore.appendChild(liNode);
+      let tdCookies = document.createElement('td');
+      tdCookies.textContent = this.cookiesSoldEachHourArray[i];
+      tr.appendChild(tdCookies);
 
       totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
 
       // For the last iteration only.
       if (i === 13){
 
-        liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
-
-        seattleStore.appendChild(liNode);
+        let tdCookiesTotal = document.createElement('td');
+        tdCookiesTotal.textContent = totalCookiesSoldPerDay;
+        tr.appendChild(tdCookiesTotal);
+        storeTableHeaders.appendChild(tr);
       }
     }
+  };
 
+  // Call the functions.
+  this.getCookieSalesPerHour();
+  this.renderTheList();
+
+}
+
+// Setup each store.
+let seattle = new Store('Seattle', 23, 65, 6.3);
+let tokyo = new Store('Tokyo', 3, 24, 1.2);
+let dubai = new Store('Dubai', 11, 38, 3.7);
+let paris = new Store('Paris', 20, 38, 2.3);
+let lima = new Store('Lima', 2, 16, 4.6);
+
+// Generate the hourly totals for all stores and place at bottom of table.
+function Footers(){
+
+  let tr = document.createElement('tr');
+
+  let tdEmpty = document.createElement('td');
+  tr.appendChild(tdEmpty);
+
+  let hourlyTotal = 0;
+  let grandTotal = 0;
+
+  for(let i = 0; i < 14; i++){
+    hourlyTotal = seattle.cookiesSoldEachHourArray[i] + tokyo.cookiesSoldEachHourArray[i] +
+      dubai.cookiesSoldEachHourArray[i] + paris.cookiesSoldEachHourArray[i] +
+      lima.cookiesSoldEachHourArray[i];
+
+    grandTotal += hourlyTotal;
+
+    let tdHourlyTotal = document.createElement('td');
+    tdHourlyTotal.textContent = hourlyTotal;
+    tr.appendChild(tdHourlyTotal);
   }
-};
 
-// Define tokyoStore properties and functions.
-let tokyo = {
-  // Properties.
-  name: 'Tokyo',
-  min: 3,
-  max: 24,
-  avg: 1.2,
-  cookiesSoldEachHourArray: [],
+  let tdGrandTotal = document.createElement('td');
+  tdGrandTotal.textContent = grandTotal;
+  tr.appendChild(tdGrandTotal);
 
-  // Functions.  Put comma after each closing brace of a function, except the final one.
-  // Generate random numbers of customers.
-  getRandomCustomers: function() {
-    return Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
-  },
+  storeTableFooters.appendChild(tr);
+}
 
-  // Generate the number of cookies sold for a given (this) hour.
-  getCookieSalesPerHour: function() {
-    let customersThisHour = this.getRandomCustomers();
-    let totalCookiesSoldThisHour = Math.ceil(customersThisHour * this.avg);
-
-    // Send the number of cookies sold for the hour to the array.
-    this.cookiesSoldEachHourArray.push(totalCookiesSoldThisHour);
-    console.log(this.cookiesSoldEachHourArray);
-  },
-
-  // Render the list of cookies sold per hour to the webpage.
-  renderTheList: function() {
-
-    let pNode = document.createElement('p'); // <p> node
-    pNode.textContent = tokyo.name;
-    tokyoStore.appendChild(pNode);
-
-    let totalCookiesSoldPerDay = 0;
-
-    // Create a loop for each of the 14 hours.
-    for(let i = 0; i < 14; i++){
-
-      this.getCookieSalesPerHour();
-
-      // Declare variables.
-      let liNode = document.createElement('li'); // <li> node
-
-      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
-      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
-
-      // Use for validation purposes.
-      console.log(this.cookiesSoldEachHourArray[i]);
-
-      // Add child to existing id "tokyoList".
-      tokyoStore.appendChild(liNode);
-
-      totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
-
-      // For the last iteration only.
-      if (i === 13){
-
-        liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
-
-        tokyoStore.appendChild(liNode);
-      }
-    }
-
-  }
-};
-
-// Define dubaiStore properties and functions.
-let dubai = {
-  // Properties.
-  name: 'Dubai',
-  min: 11,
-  max: 38,
-  avg: 3.7,
-  cookiesSoldEachHourArray: [],
-
-  // Functions.  Put comma after each closing brace of a function, except the final one.
-  // Generate random numbers of customers.
-  getRandomCustomers: function() {
-    return Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
-  },
-
-  // Generate the number of cookies sold for a given (this) hour.
-  getCookieSalesPerHour: function() {
-    let customersThisHour = this.getRandomCustomers();
-    let totalCookiesSoldThisHour = Math.ceil(customersThisHour * this.avg);
-
-    // Send the number of cookies sold for the hour to the array.
-    this.cookiesSoldEachHourArray.push(totalCookiesSoldThisHour);
-    console.log(this.cookiesSoldEachHourArray);
-  },
-
-  // Render the list of cookies sold per hour to the webpage.
-  renderTheList: function() {
-
-    let pNode = document.createElement('p'); // <p> node
-    pNode.textContent = dubai.name;
-    dubaiStore.appendChild(pNode);
-
-    let totalCookiesSoldPerDay = 0;
-
-    // Create a loop for each of the 14 hours.
-    for(let i = 0; i < 14; i++){
-
-      this.getCookieSalesPerHour();
-
-      // Declare variables.
-      let liNode = document.createElement('li'); // <li> node
-
-      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
-      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
-
-      // Use for validation purposes.
-      console.log(this.cookiesSoldEachHourArray[i]);
-
-      // Add child to existing id "dubaiList".
-      dubaiStore.appendChild(liNode);
-
-      totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
-
-      // For the last iteration only.
-      if (i === 13){
-
-        liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
-
-        dubaiStore.appendChild(liNode);
-      }
-    }
-
-  }
-};
-
-// Define parisStore properties and functions.
-let paris = {
-  // Properties.
-  name: 'Paris',
-  min: 20,
-  max: 38,
-  avg: 2.3,
-  cookiesSoldEachHourArray: [],
-
-  // Functions.  Put comma after each closing brace of a function, except the final one.
-  // Generate random numbers of customers.
-  getRandomCustomers: function() {
-    return Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
-  },
-
-  // Generate the number of cookies sold for a given (this) hour.
-  getCookieSalesPerHour: function() {
-    let customersThisHour = this.getRandomCustomers();
-    let totalCookiesSoldThisHour = Math.ceil(customersThisHour * this.avg);
-
-    // Send the number of cookies sold for the hour to the array.
-    this.cookiesSoldEachHourArray.push(totalCookiesSoldThisHour);
-    console.log(this.cookiesSoldEachHourArray);
-  },
-
-  // Render the list of cookies sold per hour to the webpage.
-  renderTheList: function() {
-
-    let pNode = document.createElement('p'); // <p> node
-    pNode.textContent = paris.name;
-    parisStore.appendChild(pNode);
-
-    let totalCookiesSoldPerDay = 0;
-
-    // Create a loop for each of the 14 hours.
-    for(let i = 0; i < 14; i++){
-
-      this.getCookieSalesPerHour();
-
-      // Declare variables.
-      let liNode = document.createElement('li'); // <li> node
-
-      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
-      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
-
-      // Use for validation purposes.
-      console.log(this.cookiesSoldEachHourArray[i]);
-
-      // Add child to existing id "parisList".
-      parisStore.appendChild(liNode);
-
-      totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
-
-      // For the last iteration only.
-      if (i === 13){
-
-        liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
-
-        parisStore.appendChild(liNode);
-      }
-    }
-
-  }
-};
-
-// Define limaStore properties and functions.
-let lima = {
-  // Properties.
-  name: 'Lima',
-  min: 2,
-  max: 16,
-  avg: 4.6,
-  cookiesSoldEachHourArray: [],
-
-  // Functions.  Put comma after each closing brace of a function, except the final one.
-  // Generate random numbers of customers.
-  getRandomCustomers: function() {
-    return Math.floor(Math.random() * (this.max - this.min + 1) + this.min);
-  },
-
-  // Generate the number of cookies sold for a given (this) hour.
-  getCookieSalesPerHour: function() {
-    let customersThisHour = this.getRandomCustomers();
-    let totalCookiesSoldThisHour = Math.ceil(customersThisHour * this.avg);
-
-    // Send the number of cookies sold for the hour to the array.
-    this.cookiesSoldEachHourArray.push(totalCookiesSoldThisHour);
-    console.log(this.cookiesSoldEachHourArray);
-  },
-
-  // Render the list of cookies sold per hour to the webpage.
-  renderTheList: function() {
-
-    let pNode = document.createElement('p'); // <p> node
-    pNode.textContent = lima.name;
-    limaStore.appendChild(pNode);
-
-    let totalCookiesSoldPerDay = 0;
-
-    // Create a loop for each of the 14 hours.
-    for(let i = 0; i < 14; i++){
-
-      this.getCookieSalesPerHour();
-
-      // Declare variables.
-      let liNode = document.createElement('li'); // <li> node
-
-      //liNode.textContent = hours[i] + ': ' + this.cookiesSoldEachHourArray[i] + ' cookies';
-      liNode.textContent = `${hours[i]}: ${this.cookiesSoldEachHourArray[i]} cookies`;
-
-      // Use for validation purposes.
-      console.log(this.cookiesSoldEachHourArray[i]);
-
-      // Add child to existing id "limaList".
-      limaStore.appendChild(liNode);
-
-      totalCookiesSoldPerDay += this.cookiesSoldEachHourArray[i];
-
-      // For the last iteration only.
-      if (i === 13){
-        liNode.textContent = 'Total: ' + totalCookiesSoldPerDay + ' cookies';
-
-        limaStore.appendChild(liNode);
-      }
-    }
-
-  }
-};
-
-seattle.renderTheList();
-tokyo.renderTheList();
-dubai.renderTheList();
-paris.renderTheList();
-lima.renderTheList();
+Footers();
