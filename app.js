@@ -53,7 +53,7 @@ function Store(name, min, max, avg){
 
       // Send the number of cookies sold for the hour to the array.
       this.cookiesSoldEachHourArray.push(totalCookiesSoldThisHour);
-      console.log(this.cookiesSoldEachHourArray);
+      // console.log(this.cookiesSoldEachHourArray);
     }
   },
 
@@ -88,6 +88,8 @@ function Store(name, min, max, avg){
     }
   };
 
+  storeArray.push(this);
+
   // Call the functions.
   this.getCookieSalesPerHour();
   this.renderTheList();
@@ -101,6 +103,8 @@ let dubai = new Store('Dubai', 11, 38, 3.7);
 let paris = new Store('Paris', 20, 38, 2.3);
 let lima = new Store('Lima', 2, 16, 4.6);
 
+console.log(storeArray);
+
 // Generate the hourly totals for all stores and place at bottom of table.
 function Footers(){
 
@@ -112,10 +116,11 @@ function Footers(){
   let hourlyTotal = 0;
   let grandTotal = 0;
 
-  for(let i = 0; i < 14; i++){
-    hourlyTotal = seattle.cookiesSoldEachHourArray[i] + tokyo.cookiesSoldEachHourArray[i] +
-      dubai.cookiesSoldEachHourArray[i] + paris.cookiesSoldEachHourArray[i] +
-      lima.cookiesSoldEachHourArray[i];
+  for(let i = 0; i < hours.length; i++){
+    hourlyTotal = 0;
+    for(let j = 0; j < storeArray.length; j++){
+      hourlyTotal += storeArray[j].cookiesSoldEachHourArray[i];
+    }
 
     grandTotal += hourlyTotal;
 
