@@ -32,13 +32,16 @@ function Headers(){
 
 Headers();
 
-function Store(name, min, max, avg){
+function Store(name, min, max, avg, address, hoursOpen, contactInfo){
   // Properties.
   this.name = name;
   this.min = min;
   this.max = max;
   this.avg = avg;
   this.cookiesSoldEachHourArray = [];
+  this.address = address;
+  this.hoursOpen = hoursOpen;
+  this.contactInfo = contactInfo;
 
   // Generate random numbers of customers.
   this.getRandomCustomers = function() {
@@ -86,7 +89,16 @@ function Store(name, min, max, avg){
         storeTableHeaders.appendChild(tr);
       }
     }
-  };
+  },
+
+  this.renderLocations = function() {
+
+    for(let i = 0; i < storeArray.length; i++){
+      // Loop through store locations and put on index.html
+      
+    }
+  },
+
 
   storeArray.push(this);
 
@@ -97,11 +109,11 @@ function Store(name, min, max, avg){
 }
 
 // Setup each store.
-let seattle = new Store('Seattle', 23, 65, 6.3);
-let tokyo = new Store('Tokyo', 3, 24, 1.2);
-let dubai = new Store('Dubai', 11, 38, 3.7);
-let paris = new Store('Paris', 20, 38, 2.3);
-let lima = new Store('Lima', 2, 16, 4.6);
+let seattle = new Store('Seattle', 23, 65, 6.3, '123 Pike St. Seattle, WA  98121', '6am - 7pm', 'James Smith 206-123-4567');
+let tokyo = new Store('Tokyo', 3, 24, 1.2, '1-4-1, Nihmbashimuromachi, Chuo-ku, Tokyo, Japan', '6am - 7pm', 'Mikki Kobayashi 03-3211-4111');
+let dubai = new Store('Dubai', 11, 38, 3.7, '1 PVV Level 1, Mercato Mall, Jumeriah Beach Road, Dubai', '6am - 7pm', 'Mohammed Khalifa +971 4 230752');
+let paris = new Store('Paris', 20, 38, 2.3, '278 Avenue Daumesnil, Paris, France', '6am - 7pm', 'Stephan Jaques');
+let lima = new Store('Lima', 2, 16, 4.6, 'San Borja Sur 541, San Borja 15036, Peru', '6am - 7pm', 'Miguel Torres +51 936 895 422');
 
 console.log(storeArray);
 
