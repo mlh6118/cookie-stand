@@ -20,8 +20,9 @@ function Headers(){
     let tdHeaderHours = document.createElement('td');
     tdHeaderHours.textContent = hours[i];
     tr.appendChild(tdHeaderHours);
-    storeTableHeaders.appendChild(tr);
-
+    if(storeTableHeaders !== null){
+      storeTableHeaders.appendChild(tr);
+    }
   }
 
   let tdLocationTotal = document.createElement('td');
@@ -62,13 +63,17 @@ function Store(name, min, max, avg, address, hoursOpen, contactInfo){
   },
 
   // Render the list of cookies sold per hour to the webpage.
-  this.renderTheList = function() {
+  this.renderStoreData = function() {
+
+    const salesDataTable = document.getElementById('salesData');
 
     let tr = document.createElement('tr');
     let td = document.createElement('td');
     td.textContent = this.name;
     tr.appendChild(td);
-    storeTableBody.appendChild(tr);
+    if(storeTableBody !== null){
+      storeTableBody.appendChild(tr);
+    }
 
     let totalCookiesSoldPerDay = 0;
 
@@ -87,7 +92,9 @@ function Store(name, min, max, avg, address, hoursOpen, contactInfo){
         let tdCookiesTotal = document.createElement('td');
         tdCookiesTotal.textContent = totalCookiesSoldPerDay;
         tr.appendChild(tdCookiesTotal);
-        storeTableHeaders.appendChild(tr);
+        if(storeTableHeaders !== null){
+          storeTableHeaders.appendChild(tr);
+        }
       }
     }
   },
@@ -95,7 +102,7 @@ function Store(name, min, max, avg, address, hoursOpen, contactInfo){
   // Start of new function called renderLocations.
   this.renderLocations = function() {
 
-// 1. Loop through store array.
+    // 1. Loop through store array.
     // While looping, create a row. (done)
     // After row creation, create table data item. (done)
     // Assign content to table data items for each property (address, manager, phone) we want to display in the page. (done)
@@ -106,20 +113,20 @@ function Store(name, min, max, avg, address, hoursOpen, contactInfo){
 
     const locationsTable = document.getElementById('locations');
 
-    for(let i = 0; i < storeArray.length; i++){
-      let location = document.createElement('tr');
-      let address = document.createElement('td');
-      let hoursOpen = document.createElement('td');
-      let contactInfo = document.createElement('td');
+    let location = document.createElement('tr');
+    let address = document.createElement('td');
+    let hoursOpen = document.createElement('td');
+    let contactInfo = document.createElement('td');
 
-      address.textContent = this.address;
-      hoursOpen.textContent = this.hoursOpen;
-      contactInfo.textContent = this.contactInfo;
+    address.textContent = this.address;
+    hoursOpen.textContent = this.hoursOpen;
+    contactInfo.textContent = this.contactInfo;
 
-      location.appendChild(address);
-      location.appendChild(hoursOpen);
-      location.appendChild(contactInfo);
+    location.appendChild(address);
+    location.appendChild(hoursOpen);
+    location.appendChild(contactInfo);
 
+    if(locationsTable !== null){
       locationsTable.appendChild(location);
     }
   },
@@ -128,9 +135,8 @@ function Store(name, min, max, avg, address, hoursOpen, contactInfo){
 
   // Call the functions.
   this.getCookieSalesPerHour();
-  this.renderTheList();
+  this.renderStoreData();
   this.renderLocations();
-
 }
 
 // Setup each store.
@@ -170,7 +176,9 @@ function Footers(){
   tdGrandTotal.textContent = grandTotal;
   tr.appendChild(tdGrandTotal);
 
-  storeTableFooters.appendChild(tr);
+  if(storeTableFooters !== null){
+    storeTableFooters.appendChild(tr);
+  }
 }
 
 Footers();
