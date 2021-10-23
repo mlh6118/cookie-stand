@@ -64,6 +64,8 @@ function Store(name, min, max, avg, address, hoursOpen, contactInfo){
   // Render the list of cookies sold per hour to the webpage.
   this.renderTheList = function() {
 
+    const salesDataTable = document.getElementById('');
+
     let tr = document.createElement('tr');
     let td = document.createElement('td');
     td.textContent = this.name;
@@ -124,12 +126,13 @@ function Store(name, min, max, avg, address, hoursOpen, contactInfo){
     }
   },
 
+  this.renderLocations();
+
   storeArray.push(this);
 
   // Call the functions.
   this.getCookieSalesPerHour();
   this.renderTheList();
-  this.renderLocations();
 
 }
 
