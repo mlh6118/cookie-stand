@@ -6,6 +6,7 @@ const storeTableFooters = document.querySelector('tfoot');
 
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 let storeArray = [];
+let newLocationData = document.getElementById('newLocationData');
 
 // Generate the table headers.
 function Headers(){
@@ -148,10 +149,35 @@ let lima = new Store('Lima', 2, 16, 4.6, 'San Borja Sur 541, San Borja 15036, Pe
 
 console.log(storeArray);
 
+function handleSubmit(event){
+  event.preventDefault();
+
+  let newStoreCity = event.target.locationCity.value;
+  let customerMin = parseInt(event.target.minCustomers.value);
+  let customerMax = parseInt(event.target.maxCustomers.value);
+  let boughtAvg = parseInt(event.target.avgBought.value);
+
+  let newStore = new Store(newStoreCity, customerMin, customerMax, boughtAvg);
+
+  // Clear hourly totals.
+  document.getElementById('rowTotal').remove();
+
+  // Re-render hourly totals.
+  Footers();
+
+  // Clear form values.
+  document.getElementById('locationCity').value = '';
+  document.getElementById('minCustomers').value = '';
+  document.getElementById('maxCustomers').value = '';
+  document.getElementById('avgBought').value = '';
+}
+
 // Generate the hourly totals for all stores and place at bottom of table.
 function Footers(){
 
   let tr = document.createElement('tr');
+
+  tr.id = "rowTotal";
 
   let tdEmpty = document.createElement('td');
   tr.appendChild(tdEmpty);
@@ -182,3 +208,5 @@ function Footers(){
 }
 
 Footers();
+
+newLocationData.addEventListener('submit', handleSubmit);
