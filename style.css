@@ -12,19 +12,14 @@ body header {
 }
 
 body header p {
-  display: inline-block;
-  margin: 0 0 0 100px;
+  display: block;
+  margin: 0 0 0 0px;
   font-family: Lobster;
-  font-size: 100px;
+  font-size: 85px;
 }
 
 body header img {
-  width: 200px;
-  margin: 25px;
-  position: absolute;
-  top: 25%;
-  left: 00%;
-  transform: translate(0%, -50%);
-  z-index: -1;
+  width: 180px;
+  margin: 50px 0 0 0;
 }
 
