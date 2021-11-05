@@ -106,3 +106,17 @@ body footer {
   vertical-align: middle;
   color: purple;
 }
+
+#cutter {
+  width: 175px;
+  margin: 50px 50px 0 400px;
+}
+
+#fishShirt {
+  width: 175px;
+  margin: 0 75px 0 25px;
+}
+
+#frostedCookie {
+  margin: 0 50px 0 25px;
+}
