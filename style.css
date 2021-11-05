@@ -31,6 +31,11 @@ body header img {
   color:darkslategrey;
 }
 
+#locations tr {
+  /* border-bottom: 1pt solid black; */
+  height: 39px;
+}
+
 #locations tr td {
   border-bottom: 1pt solid black;
   padding: 10px;
@@ -56,13 +61,48 @@ body main p{
 body main p:first-of-type {
   display: inline-block;
   position: absolute;
-  transform: rotate(-45deg) translateX(400px) translateY(-250px);
+  transform: rotate(25deg) translateX(700px) translateY(-675px);
 }
 
 body main p:nth-of-type(2) {
   display: inline-block;
   position: absolute;
   width: 300px;
-  transform: rotate(45deg) translateX(600px) translateY(-1250px);
+  transform: rotate(-25deg) translateX(500px) translateY(-150px);
 }
 
+body main p:last-of-type {
+  display: inline-block;
+  position: absolute;
+  transform: translateX(650px) translateY(-425px);
+}
+
+body footer {
+  margin: 25px 50px;
+  text-align: center;
+}
+
+#salesData {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#newLocationData {
+  width: 35%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+#salesData tr {
+  height: 50px;
+}
+
+#salesData td {
+  width: 50px;
+  text-align: center;
+  border: 1pt solid peru;
+  vertical-align: middle;
+  color: purple;
+}
